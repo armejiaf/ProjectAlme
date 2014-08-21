@@ -1,7 +1,10 @@
 ﻿<div class="text-left">
     <a class="btn-sm btn-block btn-danger text-center " style="text-decoration: none" href="/juegos/{{FilterTeams[0].id_liga}}">Juegos</a>
 </div>
-<div class="panel-body"> 
+<div class="panel-body">
+    <h2>
+        <strong>Tabla Equipos</strong>
+    </h2> 
     <table class="table table-striped">
         <thead>
             <tr>
@@ -11,17 +14,43 @@
                     </a>
                     <span class="caret" style="cursor: pointer" ng-click="ordenarPor('-nombre')"></span>
                 </th>
-                <th style="width: 50px;"></th> 
+                <th style="text-align: center">
+                    #idLiga
+                </th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="team in FilterTeams">
+            <tr ng-repeat="team in FilterTeams | orderBy:OrdenSeleccionado">
                 <td>{{team.nombre}}</td>
-                <td>{{team.id_liga}}</td>
+                <td style="text-align: center">{{team.id_liga}}</td>
                 <td>
                     <a href="" ng-click="editTeam(team.nombre)"><i class=" glyphicon glyphicon-pencil"></i></a>
                     <a href="" ng-click="deleteTeam(team.nombre)"><i class="glyphicon glyphicon-remove"></i></a>
                 </td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>
+        <strong>Tabla Equipos N/A</strong>
+    </h2> 
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <a href="" ng-click="ordenarPorNA('nombre')">
+                        Nombre/s
+                    </a>
+                    <span class="caret" style="cursor: pointer" ng-click="ordenarPorNA('-nombre')"></span>
+                </th>
+                <th style="text-align: center">
+                    #idLiga
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="team in DeletedTeams | orderBy:OrdenSeleccionadoNA">
+                <td>{{team.nombre}}</td>
+                <td style="text-align: center">{{team.id_liga}}</td>
             </tr>
         </tbody>
     </table>

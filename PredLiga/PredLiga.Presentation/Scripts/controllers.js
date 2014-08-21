@@ -177,6 +177,11 @@ angular.module('app.controllers', [])
             $scope.OrdenSeleccionado = orden;
         };
 
+        $scope.ordenarPorNA = function (orden) {
+            $scope.OrdenSeleccionadoNA = orden;
+        };
+
+        $scope.DeletedLeagues = [];
         $scope.NombreLiga = "";
         $scope.NombrePais = "";
 
@@ -190,6 +195,7 @@ angular.module('app.controllers', [])
         $scope.deleteLeague = function (nombre) {
             for (var i = 0; i < $scope.ligas.length; i++) {
                 if ($scope.ligas[i].nombre === nombre) {
+                    $scope.DeletedLeagues.push($scope.ligas[i]);
                     $scope.ligas.splice(i, 1);
                 }
             }
@@ -238,6 +244,7 @@ angular.module('app.controllers', [])
         console.log($stateParams.id);
    
         $scope.FilterTeams = [];
+        $scope.DeletedTeams = [];
 
         $scope.teams = [{nombre: 'Levante', id_liga: 1},{nombre: 'Barcelona', id_liga: 1},{nombre: 'Madrid', id_liga: 1},{nombre: 'Liverpool', id_liga: 2},{nombre: 'Manchester', id_liga:2},
         {nombre: 'Chelsea', id_liga: 2},{nombre: 'Genova', id_liga: 3},{ nombre: 'Cagliari', id_liga: 3 }, { nombre: 'Inter', id_liga: 5 }, { nombre: 'Monaco', id_liga: 4 }, { nombre: 'Paris', id_liga: 4 },
@@ -251,6 +258,13 @@ angular.module('app.controllers', [])
                     $scope.FilterTeams.push($scope.teams[i]);
                 }
             }
+        };
+
+        $scope.ordenarPor = function (orden) {
+            $scope.OrdenSeleccionado = orden;
+        };
+        $scope.ordenarPorNA = function (orden) {
+            $scope.OrdenSeleccionadoNA = orden;
         };
 
         inicio();
@@ -267,7 +281,8 @@ angular.module('app.controllers', [])
         $scope.deleteTeam = function (nombre) {
             for (var i = 0; i < $scope.teams.length; i++) {
                 if ($scope.teams[i].nombre === nombre ) {
-                    $scope.teams.splice(i,1);
+                    $scope.DeletedTeams.push($scope.teams[i]);
+                    $scope.teams.splice(i, 1);
                     inicio();
                 }
             }
