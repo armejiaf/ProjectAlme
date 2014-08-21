@@ -1,0 +1,119 @@
+﻿<link href="~/Views/profile.css" rel="stylesheet" type="text/css" />    
+            
+                 
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#">Home</a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+
+    
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+                    <div class="user-image">
+                        <img src="http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-8/256/User-blue-icon.png" alt="Allan Mejia" title="Allan Mejia" class="img-circle">
+                    </div>
+                    <div class="user-info-block">
+                        <div class="user-heading">
+                            <h3>Allan Mejia</h3>
+                            <span class="help-block">San Pedro Sula, HN</span>
+                        </div>
+                    </div>
+         </div>
+    </div>
+
+
+   
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div>
+                <div class="panel-heading">
+                    <div class="input-group">
+                        <input type="search" class="form-control" placeholder="Buscar liga" ng-model="buscar.nombre">
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <a href="" ng-click="ordenarPor('nombre')">
+                                        Nombre/s
+                                    </a>
+                                    <span class="caret" style="cursor: pointer" ng-click="ordenarPor('-nombre')"></span>
+                                </th>
+                                <th>País</th>
+                                <th>Fecha inicio</th>
+                                <th>Fecha finalizacion</th>
+                                <th style="width: 50px;"></th>                     
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="liga in ligas | orderBy:OrdenSeleccionado | filter:buscar">
+                                <td><a class="btn-link" href="/league/{{liga.id}}">{{liga.nombre}}</a></td>
+                                <td>{{liga.pais | uppercase}}</td>
+                                <td>{{liga.inicio | date:'fullDate'}}</td>
+                                <td>{{liga.fin | date:'fullDate'}} </td>
+                                <td>
+                                    <a href="" ng-click="editLeague(liga.nombre,ligas.pais)"><i class="glyphicon glyphicon-pencil"></i></a>
+                                    <a href="" ng-click="deleteLeague(liga.nombre)"><i class="glyphicon glyphicon-remove"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-hide="isEditingLeague">
+        <form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4" ng-submit="addNewLeague()">
+            <h2 class="text-center">Nueva Liga</h2>
+            <div class="form-box">
+                <div class="form-group">
+                    <input ng-model="NombreLiga" type="text" class="form-control" placeholder="Nombre de Liga" required />
+                    <input ng-model="NombrePais" type="text" class="form-control" style="margin-top: 5px"placeholder="Nombre de Pais" required />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit" ng-disabled="!(NombreEquipo|| NombrePais)" disabled>Agregar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row" ng-show="isEditingLeague">
+        <form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4" ng-submit="FinishEditingLeague()">
+            <h2 class="text-center">Editar Liga</h2>
+            <div class="form-box">
+                <div class="form-group">
+                    <input ng-model="NuevoNombreLiga" type="text" class="form-control" placeholder="Nombre de Liga" required />
+                    <input ng-model="NuevoNombrePaisLiga" type="text" class="form-control" style="margin-top: 5px" placeholder=" Nombre de Pais" required />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit">Guardar</button>
+                    <button class="btn btn-primary btn-block" type="button" ng-click="cancelEditLeague()">Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Delete Confirmation</h3>
+    </div>
+    <div class="modal-body">
+        <p class="error-text">Are you sure you want to delete the user?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+    </div>
+</div>

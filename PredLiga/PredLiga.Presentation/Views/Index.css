@@ -1,0 +1,10 @@
+﻿form a {
+    background-color: transparent;
+    border: 2px solid black;   
+}
+
+a:hover {
+    color: crimson;
+    text-decoration: none;
+      
+}
