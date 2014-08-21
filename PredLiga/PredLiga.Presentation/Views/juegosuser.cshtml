@@ -1,0 +1,53 @@
+﻿<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <h3>
+                <strong>Juegos</strong>
+            </h3>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th style="text-align: center">
+                            #id
+                        </th>
+                        <th style="text-align: center">
+                            Partido
+                        </th>
+                        <th style="text-align: center">
+                            Fecha Encuentro
+                        </th>
+                        <th style="text-align: center">
+                            Marcador
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="juego in FilterGames">
+                        <td style="text-align: center">{{juego.id_liga_juego}}</td>
+                        <td style="text-align: center">{{juego.contrincante1}} vs {{juego.contrincante2}}</td>
+                        <td style="text-align: center">{{juego.encuentro}}</td>
+                        <td style="text-align: center">{{juego.marcador1}}-{{juego.marcador2}}</td>
+                        <td>
+                            <a href="" ng-click="editMarcardor(juego.marcador1,juego.marcador2)"><i class="glyphicon glyphicon-pencil"></i></a>
+                        </td>                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div class="row">
+            <form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4" ng-submit="FinishEditingScore()">
+                <h2 class="text-center">Predecir Marcador</h2>
+                <div class="form-box">
+                    <div class="form-group">
+                        <input ng-model="NuevoNombreMarcador1" type="text" class="form-control" placeholder="Ingrese el Marcador de Equipo1" required />
+                        <input ng-model="NuevoNombreMarcador2" type="text" class="form-control" style="margin-top: 5px" placeholder="Ingrese el Marcador de Equipo2" required />
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit" ng-disabled="!(NuevoNombreMarcador1 || NuevoNombreMarcador2)" disabled>Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

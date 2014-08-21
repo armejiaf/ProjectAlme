@@ -115,10 +115,38 @@ angular.module('app.controllers', [])
             $scope.NuevoNombreContrincante2 = nombreEquipo2;
         };
 
+        $scope.isEditingScore = false;
+        $scope.NombreMarcador1 = "";
+        $scope.NombreMarcador2 = "";
+        $scope.NuevoNombreMarcador1 = "";
+        $scope.NuevoNombreMarcador2 = "";
+
+        $scope.editMarcador = function (marcador1, marcador2) {
+            $scope.isEditingScore = true;
+            $scope.NombreMarcador1 = marcador1;
+            $scope.marcador2 = marcador2;
+            $scope.NuevoNombreMarcador1 = marcador1;
+            $scope.NuevoNombreMarcador2 = marcador2;
+        };
+
         $scope.cancelEdit = function () {
             $scope.isEditing = false;
         };
+        $scope.FinishEditingScore = function () {
+            for (var i = 0; i < $scope.availableGames.length; i++) {
+                if ($scope.availableGames[i].marcador1 === $scope.NombreMarcador1) {
+                    $scope.availableGames[i].marcador1 = $scope.NuevoNombreMarcador1;
+                    $scope.availableGames[i].marcador2 = $scope.NuevoNombreMarcador2;
+                }
+            }
+            $scope.isEditingScore = false;
+            $scope.NombreMarcador1 = "";
+            $scope.NombreMarcador2 = "";
+            $scope.NuevoNombreMarcador1 = "";
+            $scope.NuevoNombreMarcador2 = "";
 
+            inicio();
+        };
         $scope.FinishEditing = function () {
             for (var i = 0; i < $scope.availableGames.length; i++) {
                 if ($scope.availableGames[i].contrincante1 === $scope.NombreContrincante1Anterior) {
@@ -200,7 +228,14 @@ angular.module('app.controllers', [])
                 }
             }
         };
-
+        $scope.removeLeague = function (nombre) {
+            for (var i = 0; i < $scope.DeletedLeagues.length; i++) {
+                if ($scope.DeletedLeagues[i].nombre === nombre) {
+                    $scope.ligas.push($scope.DeletedLeagues[i]);
+                    $scope.DeletedLeagues.splice(i, 1);
+                }
+            }
+        };
         $scope.isEditingLeague = false;
         $scope.NombreAnteriorLiga = "";
         $scope.NuevoNombreLiga = "";

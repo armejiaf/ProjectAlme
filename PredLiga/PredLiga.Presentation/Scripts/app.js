@@ -34,6 +34,12 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                templateUrl: '/views/register',
                controller: 'RegisterCtrl'
            })
+            //Perfil usuario
+              .state('Perfilu', {
+                  url: '/perfilu',
+                  templateUrl: '/views/perfilu',
+                  controller: 'ProfileCtrl'
+              })
               //ESTADO DE RECUPERAR LA CLAVE
            .state('ForgotPassword', {
                url: '/forgot-password',
@@ -55,11 +61,25 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                templateUrl: '/views/league',
                controller: 'LeagueCtrl'
            })
+             //Acceder a la liga usuario
+           .state('League User', {
+               url: '/leagueu/:id',
+               layout: 'basic',
+               templateUrl: '/views/leagueuser',
+               controller: 'LeagueCtrl'
+           })
             //Acceder al los partidos
            .state('Games', {
                url: '/juegos/:id',
                layout: 'basic',
                templateUrl: '/views/juegos',
+               controller: 'GamesCtrl'
+           })
+             //Acceder al los partidos usuario
+           .state('Games Usuario', {
+               url: '/juegosu/:id',
+               layout: 'basic',
+               templateUrl: '/views/juegosuser',
                controller: 'GamesCtrl'
            })
            

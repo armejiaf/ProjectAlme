@@ -1,0 +1,28 @@
+﻿<div class="text-left">
+    <a class="btn-sm btn-block btn-danger text-center " style="text-decoration: none" href="/juegosu/{{FilterTeams[0].id_liga}}">Juegos</a>
+</div>
+<div class="panel-body">
+    <h2>
+        <strong>Equipos</strong>
+    </h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <a href="" ng-click="ordenarPor('nombre')">
+                        Nombre/s
+                    </a>
+                    <span class="caret" style="cursor: pointer" ng-click="ordenarPor('-nombre')"></span>
+                </th>
+                <th style="text-align: center">
+                    #idLiga
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="team in FilterTeams | orderBy:OrdenSeleccionado">
+                <td>{{team.nombre}}</td>
+                <td style="text-align: center">{{team.id_liga}}</td>
+
+</div>
+

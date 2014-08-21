@@ -1,0 +1,111 @@
+﻿<link href="~/Views/profile.css" rel="stylesheet" type="text/css" />
+
+<!--COMMENT-->
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#">Home</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="user-image">
+                <img src="http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-8/256/User-blue-icon.png" alt="User Allan" title="User Mejia" class="img-circle">
+            </div>
+            <div class="user-info-block">
+                <div class="user-heading">
+                    <h3>User Allan</h3>
+                    <span class="help-block">San Pedro Sula, HN</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div>
+                <div class="panel-body">
+                    <h2>
+                        <strong>Ligas</strong>
+                    </h2>
+                    <div class="panel-heading">
+                        <div class="input-group">
+                            <input type="search" class="form-control" placeholder="Buscar liga" ng-model="buscar.nombre">
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <a href="" ng-click="ordenarPor('nombre')">
+                                        Nombre/s
+                                    </a>
+                                    <span class="caret" style="cursor: pointer" ng-click="ordenarPor('-nombre')"></span>
+                                </th>
+                                <th>País</th>
+                                <th>Fecha inicio</th>
+                                <th>Fecha finalizacion</th>
+                                <th>Agregar Liga</th>
+                                <th style="width: 50px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="liga in ligas | orderBy:OrdenSeleccionado | filter:buscar">
+                                <td>{{liga.nombre}}</td>
+                                <td>{{liga.pais | uppercase}}</td>
+                                <td>{{liga.inicio | date:'fullDate'}}</td>
+                                <td>{{liga.fin | date:'fullDate'}} </td>
+                                <td>
+                                    <a href="" ng-click="deleteLeague(liga.nombre)"><i class="glyphicon glyphicon-paperclip"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2>
+                        <strong>Mis Ligas</strong>
+                    </h2>
+                    <div class="panel-heading">
+                        <div class="input-group">
+                            <input type="search" class="form-control" placeholder="Buscar liga" ng-model="buscar1.nombre">
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <a href="" ng-click="ordenarPorNA('nombre')">
+                                        Nombre/s
+                                    </a>
+                                    <span class="caret" style="cursor: pointer" ng-click="ordenarPorNA('-nombre')"></span>
+                                </th>
+                                <th>País</th>
+                                <th>Fecha inicio</th>
+                                <th>Fecha finalizacion</th>
+                                <th style="width: 50px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="liga in DeletedLeagues | orderBy:OrdenSeleccionadoNA | filter:buscar1">
+                                <td><a class="btn-link" href="/leagueu/{{liga.id}}">{{liga.nombre}}</a></td>
+                                <td>{{liga.pais | uppercase}}</td>
+                                <td>{{liga.inicio | date:'fullDate'}}</td>
+                                <td>{{liga.fin | date:'fullDate'}} </td>
+                                <td>
+                                    <a href="" ng-click="removeLeague(liga.nombre)"><i class="glyphicon glyphicon-remove"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
