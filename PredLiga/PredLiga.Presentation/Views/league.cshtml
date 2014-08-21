@@ -1,7 +1,7 @@
-﻿<div class="btn-toolbar">
-  <!--COMMETS-->
+﻿<div class="text-left">
+    <a class="btn-sm btn-block btn-danger text-center " style="text-decoration: none" href="/juegos/{{FilterTeams[0].id_liga}}">Juegos</a>
 </div>
-<div class="panel-body">
+<div class="panel-body"> 
     <table class="table table-striped">
         <thead>
             <tr>
@@ -28,7 +28,7 @@
     <div class="row" ng-hide="isEditing">
         <form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4" ng-submit="addNewTeam()">
             <h2 class="text-center">Nuevo Equipo</h2>
-            <div class="form-box">
+            <div class="form-box" style="background-color: transparent">
                 <div class="form-group">
                     <input ng-model="NombreEquipo" type="text" class="form-control" placeholder="Nombre de Equipo" required />
                 </div>
@@ -42,12 +42,12 @@
     <div class="row" ng-show="isEditing">
         <form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4" ng-submit="FinishEditing()">
             <h2 class="text-center">Editar Equipo</h2>
-            <div class="form-box">
+            <div class="form-box" style="background-color: transparent">
                 <div class="form-group">
                     <input ng-model="NuevoNombre" type="text" class="form-control" placeholder="Nombre de Equipo" required />
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit" >Guardar</button>
+                    <button class="btn btn-primary btn-block" type="submit" ng-disabled="!(NuevoNombre)" disabled>Guardar</button>
                     <button class="btn btn-primary btn-block" type="button" ng-click="cancelEdit()">Cancelar</button>
                 </div>
             </div>

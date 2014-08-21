@@ -49,6 +49,93 @@ angular.module('app.controllers', [])
         };
     }])
 
+     // Path: /juegos
+    .controller('GamesCtrl', ['$scope', '$location', '$window', '$stateParams', function ($scope, $location, $window, $stateParams) {
+        $scope.$root.title = 'PredLiga | Juegos';
+        // TODO: Manejar Juegos
+        console.log($stateParams.id);
+
+        $scope.FilterGames = [];
+        $scope.DeletedGames = [];
+
+        $scope.availableGames = [
+        { id_liga_juego: 1, contrincante1: "Barcelona",contrincante2:"Madrid", encuentro: new Date(), marcador1: "0",marcador2:"0"},
+         { id_liga_juego: 1, contrincante1: "Madrid", contrincante2: "Levante", encuentro: new Date(), marcador1: "0", marcador2: "0" },
+         { id_liga_juego: 2, contrincante1: "Chelsea", contrincante2: "Manchester", encuentro: new Date(), marcador1: "0", marcador2: "0" },
+         { id_liga_juego: 3, contrincante1: "Genova", contrincante2: "Calgliari", encuentro: new Date(), marcador1: "0", marcador2: "0" },
+         { id_liga_juego: 4, contrincante1: "Monaco", contrincante2: "Francia", encuentro: new Date(), marcador1: "0", marcador2: "0" },
+          { id_liga_juego: 5, contrincante1: "Changai", contrincante2: "Chou", encuentro: new Date(), marcador1: "0", marcador2: "0" }
+        ];
+
+        var inicio = function () {
+            $scope.FilterGames = [];
+            for (var i = 0; i < $scope.availableGames.length; i++) {
+                if ($scope.availableGames[i].id_liga_juego.toString() === $stateParams.id) {
+                    $scope.FilterGames.push($scope.availableGames[i]);
+                }
+            }
+        };
+
+        inicio();
+        $scope.Contrincante1 = "";
+        $scope.Contrincante2 = "";
+
+        $scope.addNewGame = function () {
+            var game = {
+                id_liga_juego: parseInt($stateParams.id), contrincante1: $scope.Contrincante1,
+                contrincante2: $scope.Contrincante2, encuentro: new Date(), marcador1: "0",marcador2:"0"
+            };
+            $scope.availableGames.push(game);
+            inicio();
+            $scope.Contrincante1 = "";
+            $scope.Contrincante2 = "";
+        };
+
+        $scope.deleteGame = function (nombreEquipo1, nombreEquipo2) {
+            for (var i = 0; i < $scope.availableGames.length; i++) {
+                if ($scope.availableGames[i].contrincante1 === nombreEquipo1 && $scope.availableGames[i].contrincante2 === nombreEquipo2) {
+                    $scope.DeletedGames.push($scope.availableGames[i]);
+                    $scope.availableGames.splice(i, 1);
+                    inicio();
+                }
+            }
+        };
+
+        $scope.isEditing = false;
+        $scope.NombreContrincante1Anterior = "";
+        $scope.NombreContrincante2Anterior = "";
+        $scope.NuevoNombreContrincante1 = "";
+        $scope.NuevoNombreContrincante2 = "";
+
+        $scope.editGame = function (nombreEquipo1, nombreEquipo2) {
+            $scope.isEditing = true;
+            $scope.NombreContrincante1Anterior = nombreEquipo1;
+            $scope.NombreContrincante2Anterior = nombreEquipo2;
+            $scope.NuevoNombreContrincante1 = nombreEquipo1;
+            $scope.NuevoNombreContrincante2 = nombreEquipo2;
+        };
+
+        $scope.cancelEdit = function () {
+            $scope.isEditing = false;
+        };
+
+        $scope.FinishEditing = function () {
+            for (var i = 0; i < $scope.availableGames.length; i++) {
+                if ($scope.availableGames[i].contrincante1 === $scope.NombreContrincante1Anterior) {
+                    $scope.availableGames[i].contrincante1 = $scope.NuevoNombreContrincante1;
+                    $scope.availableGames[i].contrincante2 = $scope.NuevoNombreContrincante2;
+                }
+            }
+            $scope.isEditing = false;
+            $scope.NombreContrincante1Anterior = "";
+            $scope.NombreContrincante2Anterior = "";
+            $scope.NuevoNombreContrincante1 = "";
+            $scope.NuevoNombreContrincante2 = "";
+
+            inicio();
+        };
+    }])
+
      // Path: /forgot-password
     .controller('ForgotPasswordCtrl', ['$scope', '$location', '$window', function ($scope, $location, $window) {
         $scope.$root.title = 'AngularJS SPA | Recuperar password';
@@ -144,7 +231,7 @@ angular.module('app.controllers', [])
      
     }])
 
-      // Path: /league
+      // Path: /leaguea
     .controller('LeagueCtrl', ['$scope', '$location', '$window','$stateParams', function ($scope, $location, $window, $stateParams) {
         $scope.$root.title = 'PredLiga | Liga';
 

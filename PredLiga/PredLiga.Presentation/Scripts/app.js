@@ -55,16 +55,14 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                templateUrl: '/views/league',
                controller: 'LeagueCtrl'
            })
+            //Acceder al los partidos
+           .state('Games', {
+               url: '/juegos/:id',
+               layout: 'basic',
+               templateUrl: '/views/juegos',
+               controller: 'GamesCtrl'
+           })
            
-             //Agregar nueva Liga
-             .state('NewLeague', {
-                 //  url: '/team/newTeam',
-                 url: '/newLeague',
-                 layout: 'basic',
-                 templateUrl: '/views/newLeague',
-                 controller: 'ProfileCtrl'
-             })
-
          .state('otherwise', {
              url: '*path',
              templateUrl: '/views/404',

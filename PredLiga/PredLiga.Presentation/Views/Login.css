@@ -68,3 +68,11 @@
 		margin-top:10px;
  	}		
 }
+
+button {
+    border: 2px solid black;
+    color: black;
+    background-color: transparent;
+    margin-top: 10px;
+    
+}

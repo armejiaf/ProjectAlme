@@ -3,6 +3,12 @@
     border: 2px solid black;   
 }
 
+a:link {
+    color: black;   
+}
+a:visited {
+    color: black;
+}
 a:hover {
     color: crimson;
     text-decoration: none;
