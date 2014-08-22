@@ -25,8 +25,14 @@ angular.module('app.controllers', [])
     .controller('LoginCtrl', ['$scope', '$location', '$window', function ($scope, $location, $window) {
         $scope.$root.title = 'PredLiga | Sign In';
         // TODO: Authorize a user
+        $scope.username = "";
+        $scope.password = "";
         $scope.login = function () {
-            $location.path('/profile');
+            if ($scope.username === "admin@pdliga.com" && $scope.password === "admin")
+                $location.path('/profile'); 
+            else if ($scope.username === "user@pdliga.com" && $scope.password === "user")
+                $location.path('/perfilu');
+            else
             return false;
         };
         $scope.$on('$viewContentLoaded', function () {
@@ -124,7 +130,7 @@ angular.module('app.controllers', [])
         $scope.editMarcador = function (marcador1, marcador2) {
             $scope.isEditingScore = true;
             $scope.NombreMarcador1 = marcador1;
-            $scope.marcador2 = marcador2;
+            $scope.NombreMarcador2 = marcador2;
             $scope.NuevoNombreMarcador1 = marcador1;
             $scope.NuevoNombreMarcador2 = marcador2;
         };
@@ -133,8 +139,8 @@ angular.module('app.controllers', [])
             $scope.isEditing = false;
         };
         $scope.FinishEditingScore = function () {
-            for (var i = 0; i < $scope.availableGames.length; i++) {
-                if ($scope.availableGames[i].marcador1 === $scope.NombreMarcador1) {
+            for (var i = 0; i < $scope.FilterGames.length; i++) {
+                if ($scope.FilterGames[i].marcador1 === $scope.NombreMarcador1) {
                     $scope.availableGames[i].marcador1 = $scope.NuevoNombreMarcador1;
                     $scope.availableGames[i].marcador2 = $scope.NuevoNombreMarcador2;
                 }
@@ -144,7 +150,6 @@ angular.module('app.controllers', [])
             $scope.NombreMarcador2 = "";
             $scope.NuevoNombreMarcador1 = "";
             $scope.NuevoNombreMarcador2 = "";
-
             inicio();
         };
         $scope.FinishEditing = function () {
